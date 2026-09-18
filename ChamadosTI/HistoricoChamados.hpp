@@ -7,7 +7,7 @@ using namespace std;
 
 struct NoHistory{
     string dateTime;
-    string state;
+    string descricao;
 
     NoHistory * next;
 };
@@ -15,11 +15,14 @@ struct NoHistory{
 
 class HistoricoChamados{
 private:
-    NoHistory * start;
+    NoHistory * noLista;
    
 public:
-    void insertListHistory();
+    HistoricoChamados();
+    void insertListHistory(string dateTime, string descricao);
+    void insertIfListEmpity(string dateTime, string descricao);
     void printList();
+    bool isEmpity();
 };
 
 
