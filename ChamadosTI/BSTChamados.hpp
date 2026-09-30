@@ -20,7 +20,6 @@ struct Chamado{
     HistoricoChamados * historico;
 };
 
-
 struct NodeBST{
   
     Chamado chamado;
@@ -31,40 +30,38 @@ struct NodeBST{
 
 };
 
-
 class BSTChamados{
 private:
 
     NodeBST * root;
    
     NodeBST* inserIfBSTEmpity(NodeBST * noAtual, Chamado newChamado, NodeBST *pai);
+    NodeBST* searchMenorNoBST(NodeBST * noAtual);
+    void transplantNode(NodeBST * noAtual,NodeBST *noTransplant);
+    NodeBST* searchNoBSTById(long id);
 
 public:
     BSTChamados();
     ~BSTChamados();
 
     NodeBST* insertBST(NodeBST * noAtual, Chamado newChamado, NodeBST* pai);
-    void searchChamadoById(long id);
+    long searchChamadoById(long id);
     void removeChamadoById(long id);
-    void listarEmOrdemById();
-
+    
+    
     long searchMenorId();
     long searchMaiorId();
-
+    
     int calcularAlturaBST();
     int countChamados();
-
     void listarIdPorIntervalo(long id1, long id2);
-    void exibirPreOrdem();
-    void exibirPosOrdem();
-    void exibirPorNivel();
+    void exibirPorNivel(NodeBST * noAtual);
+    
+    void listarEmOrdem(NodeBST * noAtual);
+    void exibirPreOrdem(NodeBST * noAtual);
+    void exibirPosOrdem(NodeBST * noAtual);
 
     bool isEmpity();
-
-    void alterarStatusChamado();
-    void registrarChamadosNoHistorico();
-    
     
 };
-
 #endif
