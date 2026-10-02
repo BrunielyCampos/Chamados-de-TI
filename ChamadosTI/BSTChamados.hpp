@@ -44,30 +44,31 @@ private:
     NodeBST* searchNoBSTById(long id);
 
     void listarPorIntervalo( NodeBST* noAtual, long id1, long id2);
-    int calcularAltura(NodeBST* noAtual);
-    int countChamados(NodeBST* noAtual);
-    void exibirPorNivel(NodeBST * noAtual);
-
-public:
+    
+    
+    public:
     BSTChamados();
-
+    
     NodeBST* insertBST(NodeBST * noAtual, Chamado newChamado, NodeBST* pai);
+    void insertChamadoBST(Chamado newChamado);
     long searchChamadoById(long id);
     void removeChamadoById(long id);
+
     
     
     long searchMenorId();
     long searchMaiorId();
     
     void listarChamadosPorIntervalo(long id1, long id2);
-    int calcularAlturaBST();
-    int countChamadosBST();
-    void exibirBSTPorNivel();
+    int calcularAltura(NodeBST* noAtual);
+    int countChamados(NodeBST* noAtual);
+    void exibirPorNivel(NodeBST * noAtual);
     
     void listarEmOrdem(NodeBST * noAtual);
     void exibirPreOrdem(NodeBST * noAtual);
     void exibirPosOrdem(NodeBST * noAtual);
-
+    
+    NodeBST* getRoot();
     bool isEmpity();
     
 };

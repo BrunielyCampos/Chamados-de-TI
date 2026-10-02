@@ -10,8 +10,7 @@
     NodeBST* BSTChamados::insertBST(NodeBST* noAtual, Chamado newChamado, NodeBST* pai){
 
         if(noAtual == nullptr){
-            inserIfBSTEmpity(noAtual, newChamado, pai);
-            return;
+            return inserIfBSTEmpity(noAtual, newChamado, pai);
         }
 
         if(newChamado.id < noAtual->chamado.id){
@@ -32,6 +31,10 @@
         }
 
         return noAtual;
+    }
+
+    void BSTChamados::insertChamadoBST(Chamado newChamado) {
+        root = insertBST(root, newChamado, nullptr);
     }
 
     NodeBST* BSTChamados::inserIfBSTEmpity(NodeBST * noAtual, Chamado newChamado, NodeBST *pai){
@@ -149,8 +152,6 @@
         
     }
 
-   
-
     long BSTChamados::searchMenorId(){
         
         NodeBST * aux = root; 
@@ -188,9 +189,6 @@
     }
 
 
-
-
-// #### INICIO METODOS AUXILIARES: SÃO DECLARADOS NO HPP COMO PRIVATE PARA RECEBER A ROOT QUE É PRIVATE, E NÃO EXPO-LA NA MAIN
 
      void BSTChamados::transplantNode(NodeBST * noAtual,NodeBST *noTransplant){
         
@@ -304,7 +302,6 @@
 
     void BSTChamados::listarChamadosPorIntervalo(long id1, long id2) {
         if (id1 > id2) {
-            cout << "Intervalo invalido!" << endl;
             return;
         }
 
@@ -312,23 +309,11 @@
         cout << endl;
     }
 
-    int BSTChamados::calcularAlturaBST() {
-        return calcularAltura(root);
-    }
-
-    int BSTChamados::countChamadosBST() {
-        return countChamados(root);
-    }
-
-    void BSTChamados::exibirBSTPorNivel() {
-        exibirPorNivel(root);
-    }
-
     
     void BSTChamados::exibirPreOrdem(NodeBST * noAtual){
         
         if (noAtual == nullptr){
-            cout<< "Arvore vazia!"<< endl;
+            return;
         }
         
         cout<< " " << noAtual->chamado.id;
@@ -339,25 +324,28 @@
     void BSTChamados::listarEmOrdem(NodeBST * noAtual){
 
         if (noAtual == nullptr){
-            cout<< "Arvore vazia!"<< endl;
+            return;
         }
 
         listarEmOrdem(noAtual->filhoEsqu);
         cout<< " " << noAtual->chamado.id;
         listarEmOrdem(noAtual->filhoDir);
 
-        cout<< endl;
     }
     
     void BSTChamados::exibirPosOrdem(NodeBST * noAtual){
 
         if (noAtual == nullptr){
-            cout<< "Arvore vazia!"<< endl;
+            return;
         }
 
         exibirPosOrdem(noAtual->filhoEsqu);
         exibirPosOrdem(noAtual->filhoDir);
         cout<< " " << noAtual->chamado.id;
+    }
+
+    NodeBST* BSTChamados::getRoot(){
+        return root;
     }
 
 
