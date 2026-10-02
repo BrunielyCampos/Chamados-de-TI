@@ -302,6 +302,7 @@
 
     void BSTChamados::listarChamadosPorIntervalo(long id1, long id2) {
         if (id1 > id2) {
+            cout << "Intervalo invalido!" << endl;
             return;
         }
 
