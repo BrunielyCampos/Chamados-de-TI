@@ -1,12 +1,9 @@
 
 #include "BSTChamados.hpp"
+#include <queue>
 
     BSTChamados::BSTChamados(){
         root = nullptr;
-
-    }
-
-    BSTChamados::~BSTChamados(){
 
     }
 
@@ -37,7 +34,7 @@
         return noAtual;
     }
 
-    NodeBST* inserIfBSTEmpity(NodeBST * noAtual, Chamado newChamado, NodeBST *pai){
+    NodeBST* BSTChamados::inserIfBSTEmpity(NodeBST * noAtual, Chamado newChamado, NodeBST *pai){
           NodeBST* newNode = new NodeBST();
 
             newNode->chamado = newChamado;
@@ -152,7 +149,50 @@
         
     }
 
-    void BSTChamados::transplantNode(NodeBST * noAtual,NodeBST *noTransplant){
+   
+
+    long BSTChamados::searchMenorId(){
+        
+        NodeBST * aux = root; 
+       
+        if (isEmpity()){
+            cout<<"AVISO: A arvore está vazia a busca não sera possivel!"<< endl;
+            return -1;
+        }        
+        
+        while (aux->filhoEsqu != nullptr){
+            aux = aux->filhoEsqu;
+        } 
+
+        cout << "Menor Id encontrado: " << aux->chamado.id << endl;
+        return aux->chamado.id;
+    }
+
+    
+    long BSTChamados::searchMaiorId(){
+        
+        NodeBST * aux = root; 
+       
+        if (root == nullptr){
+            cout<<"AVISO: A arvore está vazia a busca não sera possivel!"<< endl;
+            return -1;
+        }        
+        
+        while (aux->filhoDir != nullptr){
+            aux = aux->filhoDir;
+        } 
+
+        
+        cout << "Maior Id encontrado: " << aux->chamado.id << endl;
+        return aux->chamado.id;
+    }
+
+
+
+
+// #### INICIO METODOS AUXILIARES: SÃO DECLARADOS NO HPP COMO PRIVATE PARA RECEBER A ROOT QUE É PRIVATE, E NÃO EXPO-LA NA MAIN
+
+     void BSTChamados::transplantNode(NodeBST * noAtual,NodeBST *noTransplant){
         
         if (noAtual->pai == nullptr){
             root = noTransplant;
@@ -170,22 +210,6 @@
         
     }
 
-    long BSTChamados::searchMenorId(){
-        NodeBST * aux = root; 
-       
-        if (isEmpity()){
-            cout<<"AVISO: A arvore está vazia a busca não sera possivel!"<< endl;
-            return -1;
-        }        
-        
-        while (aux->filhoEsqu != nullptr){
-            aux = aux->filhoEsqu;
-        } 
-
-        cout << "Menor Id encontrado: " << aux->chamado.id << endl;
-        return aux->chamado.id;
-    }
-
     NodeBST* BSTChamados::searchMenorNoBST(NodeBST * noAtual){
       
         if (noAtual == nullptr){
@@ -200,38 +224,106 @@
         return noAtual;
     } 
     
-    long BSTChamados::searchMaiorId(){
-         NodeBST * aux = root; 
-       
-        if (root == nullptr){
-            cout<<"AVISO: A arvore está vazia a busca não sera possivel!"<< endl;
-            return -1;
-        }        
-        
-        while (aux->filhoDir != nullptr){
-            aux = aux->filhoDir;
-        } 
+    int BSTChamados::calcularAltura(NodeBST* noAtual){
 
-        
-        cout << "Maior Id encontrado: " << aux->chamado.id << endl;
-        return aux->chamado.id;
-    }
-    
-    int BSTChamados::calcularAlturaBST(){
-        
-    }
-    
-    int BSTChamados::countChamados(){
-        
-    }
-    
-    void BSTChamados::listarIdPorIntervalo(long id1, long id2){
+        if (noAtual == nullptr){
+            return 0;
+        }
 
+        int contEsq = calcularAltura(noAtual->filhoEsqu);
+        int contDir = calcularAltura(noAtual->filhoDir);
+
+        if (contEsq > contDir){
+            return contEsq + 1;
+        }
+        else{
+            return contDir + 1;
+        }
     }
     
-    void BSTChamados::exibirPorNivel(NodeBST * noAtual){
-        
+    int BSTChamados::countChamados(NodeBST* noAtual) {
+        if (noAtual == nullptr) {
+            return 0;
+        }
+
+        int contEsq = countChamados(noAtual->filhoEsqu);
+        int contDir = countChamados(noAtual->filhoDir);
+
+        return 1 + contEsq + contDir;
     }
+    
+    void BSTChamados::listarPorIntervalo(
+        NodeBST* noAtual, long id1, long id2) {
+
+        if (noAtual == nullptr) {
+            return;
+        }
+
+        if (id1 < noAtual->chamado.id) {
+            listarPorIntervalo(noAtual->filhoEsqu, id1, id2);
+        }
+
+        if (noAtual->chamado.id >= id1 &&
+            noAtual->chamado.id <= id2) {
+            cout << noAtual->chamado.id << " ";
+        }
+
+        if (id2 > noAtual->chamado.id) {
+            listarPorIntervalo(noAtual->filhoDir, id1, id2);
+        }
+    }
+    
+    void BSTChamados::exibirPorNivel(NodeBST* noAtual) {
+        if (noAtual == nullptr) {
+            return;
+        }
+
+        queue<NodeBST*> fila;
+        fila.push(noAtual);
+
+        while (!fila.empty()) {
+            NodeBST* noAtual = fila.front();
+            fila.pop();
+
+            cout << noAtual->chamado.id << " ";
+
+            if (noAtual->filhoEsqu != nullptr) {
+                fila.push(noAtual->filhoEsqu);
+            }
+
+            if (noAtual->filhoDir != nullptr) {
+                fila.push(noAtual->filhoDir);
+            }
+        }
+
+        cout << endl;
+    }
+
+// #### FIM METODOS AUXILIARES DA BST
+
+
+    void BSTChamados::listarChamadosPorIntervalo(long id1, long id2) {
+        if (id1 > id2) {
+            cout << "Intervalo invalido!" << endl;
+            return;
+        }
+
+        listarPorIntervalo(root, id1, id2);
+        cout << endl;
+    }
+
+    int BSTChamados::calcularAlturaBST() {
+        return calcularAltura(root);
+    }
+
+    int BSTChamados::countChamadosBST() {
+        return countChamados(root);
+    }
+
+    void BSTChamados::exibirBSTPorNivel() {
+        exibirPorNivel(root);
+    }
+
     
     void BSTChamados::exibirPreOrdem(NodeBST * noAtual){
         

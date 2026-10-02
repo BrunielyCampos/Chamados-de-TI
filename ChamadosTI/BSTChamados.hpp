@@ -34,15 +34,22 @@ class BSTChamados{
 private:
 
     NodeBST * root;
+
+    //#### Declaração de metodos auxiliares para auxiliar na implementação dos publicos no cpp.
    
     NodeBST* inserIfBSTEmpity(NodeBST * noAtual, Chamado newChamado, NodeBST *pai);
     NodeBST* searchMenorNoBST(NodeBST * noAtual);
     void transplantNode(NodeBST * noAtual,NodeBST *noTransplant);
+
     NodeBST* searchNoBSTById(long id);
+
+    void listarPorIntervalo( NodeBST* noAtual, long id1, long id2);
+    int calcularAltura(NodeBST* noAtual);
+    int countChamados(NodeBST* noAtual);
+    void exibirPorNivel(NodeBST * noAtual);
 
 public:
     BSTChamados();
-    ~BSTChamados();
 
     NodeBST* insertBST(NodeBST * noAtual, Chamado newChamado, NodeBST* pai);
     long searchChamadoById(long id);
@@ -52,10 +59,10 @@ public:
     long searchMenorId();
     long searchMaiorId();
     
+    void listarChamadosPorIntervalo(long id1, long id2);
     int calcularAlturaBST();
-    int countChamados();
-    void listarIdPorIntervalo(long id1, long id2);
-    void exibirPorNivel(NodeBST * noAtual);
+    int countChamadosBST();
+    void exibirBSTPorNivel();
     
     void listarEmOrdem(NodeBST * noAtual);
     void exibirPreOrdem(NodeBST * noAtual);
