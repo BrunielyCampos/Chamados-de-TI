@@ -2,11 +2,12 @@
 #define _FILA_CHAMADOS_HPP_
 
 #include "BSTChamados.hpp" 
+
 struct NoFila {
-    NoArvore* chamadoReferencia;
+    NodeBST* chamadoReferencia;
     NoFila* proximo;
 
-    NoFila(NoArvore* chamado); 
+    NoFila(NodeBST* chamado); 
 };
 
 class FilaChamado {
@@ -17,9 +18,9 @@ private:
 public:
     FilaChamado();
     bool filaVazia();
-    void enfileirar(NoArvore* chamado);
-    NoArvore* desenfileirar();
-    NoArvore* obterFrente();
+    void enfileirar(NodeBST* chamado);
+    NodeBST* desenfileirar();
+    NodeBST* obterFrente();
 };
 
 #endif

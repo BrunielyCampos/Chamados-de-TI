@@ -1,6 +1,6 @@
 #include "FilaChamados.hpp"
 
-NoFila::NoFila(NoArvore* chamado) {
+NoFila::NoFila(NodeBST* chamado) {
     this->chamadoReferencia = chamado;
     this->proximo = nullptr;
 }
@@ -14,7 +14,7 @@ bool FilaChamado::filaVazia() {
     return frente == nullptr;
 }
 
-void FilaChamado::enfileirar(NoArvore* chamado) {
+void FilaChamado::enfileirar(NodeBST* chamado) {
     NoFila* novoNo = new NoFila(chamado);
 
     if(filaVazia()) {
@@ -27,13 +27,13 @@ void FilaChamado::enfileirar(NoArvore* chamado) {
     }
 }
 
-NoArvore* FilaChamado::desenfileirar() { 
+NodeBST* FilaChamado::desenfileirar() { 
     if(filaVazia()) {
         return nullptr;
     }
     
     NoFila* noRemover = frente;
-    NoArvore* chamadoAtendido = noRemover->chamadoReferencia;
+    NodeBST* chamadoAtendido = noRemover->chamadoReferencia;
 
     frente = frente->proximo;
 
@@ -46,11 +46,10 @@ NoArvore* FilaChamado::desenfileirar() {
     return chamadoAtendido;
 }
 
-NoArvore* FilaChamado::obterFrente() { 
+NodeBST* FilaChamado::obterFrente() { 
     if(filaVazia()) {
         return nullptr; 
     }
     
-   
     return frente->chamadoReferencia; 
 }
