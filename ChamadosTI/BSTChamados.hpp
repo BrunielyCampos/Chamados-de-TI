@@ -1,40 +1,23 @@
-#ifndef _NO_ARVORE_HPP_
-#define _NO_ARVORE_HPP_
+#ifndef _BST_CHAMADOS_HPP_
+#define _BST_CHAMADOS_HPP_
 
+#include "NoArvore.hpp"
 #include <string>
-#include "HistoricoChamados.hpp"
-#include "StatusChamado.hpp"
-#include "CategoriaChamado.hpp"
-#include "PrioridadeChamado.hpp"
 
-struct NoArvore{ //essa arvore vai gerenciar os chamados
-    int idChamado;
-    std::string solicitante;
-    std::string descricao;
-    StatusChamado status;
-    CategoriaChamado categoria;
-    PrioridadeChamado prioridade;
+class ArvoreBST {
+private:
+    NoArvore* raiz;
+    NoArvore* inserirRecursivo(NoArvore* noAtual, NoArvore* novoChamado);
+    NoArvore* buscarRecursivo(NoArvore* noAtual, int idProcurado);
+    void listarEmOrdemRecursivo(NoArvore* noAtual);
 
-    HistoricoChamados historico;
+public:
+    ArvoreBST();
+    void cadastrarChamado(int id, std::string sol, std::string desc, CategoriaChamado cat, PrioridadeChamado pri);
+    NoArvore* getRaiz();
 
-    NoArvore* esquerda;
-    NoArvore* direita;
-
-    NoArvore(int id,  std::string soli, std::string desc, CategoriaChamado cat, PrioridadeChamado pri){
-        this->idChamado = id;
-        this->solicitante = soli;
-        this->descricao = desc;
-        this->categoria = cat;
-        this->prioridade = pri;
-
-        this->status = StatusChamado::ABERTO;
-
-
-        this->esquerda = nullptr;
-        this->direita = nullptr;
-
-    }
+    NoArvore* buscarChamado(int id);
+    void listarChamados(); 
 };
-
 
 #endif
