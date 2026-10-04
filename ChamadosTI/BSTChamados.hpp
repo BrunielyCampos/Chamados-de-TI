@@ -35,13 +35,12 @@ private:
 
     NodeBST * root;
 
-    //#### Declaração de metodos auxiliares para auxiliar na implementação dos publicos no cpp.
    
     NodeBST* inserIfBSTEmpity(NodeBST * noAtual, Chamado newChamado, NodeBST *pai);
-    NodeBST* searchMenorNoBST(NodeBST * noAtual);
+    
     void transplantNode(NodeBST * noAtual,NodeBST *noTransplant);
 
-    NodeBST* searchNoBSTById(long id);
+    NodeBST* searchMenorNoBST(NodeBST * noAtual);
 
     void listarPorIntervalo( NodeBST* noAtual, long id1, long id2);
     
@@ -53,6 +52,7 @@ private:
     void insertChamadoBST(Chamado newChamado);
     long searchChamadoById(long id);
     void removeChamadoById(long id);
+    NodeBST* searchNoBSTById(long id);
 
     
     
