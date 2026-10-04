@@ -18,34 +18,37 @@ struct Chamado{
     StatusChamado status;
 
     HistoricoChamados * historico;
+
+    Chamado() {} 
+
+    Chamado(long _id, string _desc, CategoriaChamado _cat, PrioridadeChamado _pri) {
+        id = _id;
+        descricao = _desc;
+        Categoria = _cat;
+        prioridade = _pri;
+        status = StatusChamado::ABERTO; 
+        historico = new HistoricoChamados();
+        historico->insertListHistory("Data Atual", "Chamado Aberto"); 
+    }
 };
 
 struct NodeBST{
-  
     Chamado chamado;
-
     NodeBST * filhoEsqu;
     NodeBST * filhoDir;
     NodeBST * pai;
-
 };
 
 class BSTChamados{
 private:
-
     NodeBST * root;
 
-   
     NodeBST* inserIfBSTEmpity(NodeBST * noAtual, Chamado newChamado, NodeBST *pai);
-    
-    void transplantNode(NodeBST * noAtual,NodeBST *noTransplant);
-
     NodeBST* searchMenorNoBST(NodeBST * noAtual);
-
+    void transplantNode(NodeBST * noAtual,NodeBST *noTransplant);
     void listarPorIntervalo( NodeBST* noAtual, long id1, long id2);
     
-    
-    public:
+public:
     BSTChamados();
     
     NodeBST* insertBST(NodeBST * noAtual, Chamado newChamado, NodeBST* pai);
@@ -53,8 +56,6 @@ private:
     long searchChamadoById(long id);
     void removeChamadoById(long id);
     NodeBST* searchNoBSTById(long id);
-
-    
     
     long searchMenorId();
     long searchMaiorId();
@@ -70,6 +71,5 @@ private:
     
     NodeBST* getRoot();
     bool isEmpity();
-    
 };
 #endif
