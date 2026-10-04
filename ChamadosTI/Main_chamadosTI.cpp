@@ -18,23 +18,28 @@ int main() {
 
         switch(opcao) {
             case 1: {
-                int id; 
+                long id; 
                 string nome;
-                cout << "Digite o ID e o Nome do Problema: ";
-                cin >> id >> nome;
+                int opCat, opPri;
+
+                cout << "Digite o ID numerico: ";
+                cin >> id;
                 
-                Chamado novoChamado;
-                novoChamado.id = id;
-                novoChamado.descricao = nome; 
-                novoChamado.Categoria = CategoriaChamado::REDE;
-                novoChamado.prioridade = PrioridadeChamado::MEDIA;
-                novoChamado.status = StatusChamado::ABERTO;
+                cin.ignore(); 
+
+                cout << "Digite o Nome/Descricao do Problema: ";
+                getline(cin, nome); 
                 
-                novoChamado.historico = new HistoricoChamados();
-                novoChamado.historico->insertListHistory("Data Atual", "Chamado Aberto");
+                cout << "Categoria (0-Hardware, 1-Software, 2-Rede, 3-Sistema, 4-Conta): ";
+                cin >> opCat;
+
+                cout << "Prioridade (0-Baixa, 1-Media, 2-Alta, 3-Critica): ";
+                cin >> opPri;
+                
+                Chamado novoChamado(id, nome, (CategoriaChamado)opCat, (PrioridadeChamado)opPri);
                 
                 arvore.insertChamadoBST(novoChamado);
-                cout << "Chamado " << id << " salvo na Arvore!\n";
+                cout << "Chamado " << id << " aberto com sucesso!\n";
                 break;
             }
             case 2: {
