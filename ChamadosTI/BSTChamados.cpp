@@ -15,14 +15,12 @@
 
         if(newChamado.id < noAtual->chamado.id){
 
-            noAtual->filhoEsqu =
-                insertBST(noAtual->filhoEsqu, newChamado, noAtual);
+            noAtual->filhoEsqu = insertBST(noAtual->filhoEsqu, newChamado, noAtual);
 
         }
         else if(newChamado.id > noAtual->chamado.id){
 
-            noAtual->filhoDir =
-                insertBST(noAtual->filhoDir, newChamado, noAtual);
+            noAtual->filhoDir = insertBST(noAtual->filhoDir, newChamado, noAtual);
 
         }
         else{
